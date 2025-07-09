@@ -13,6 +13,31 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
+# 日本語フォント対応のためのCSS設定
+st.markdown("""
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap');
+
+html, body, [class*="css"] {
+    font-family: 'Noto Sans JP', sans-serif;
+}
+
+.main-title {
+    font-family: 'Noto Sans JP', sans-serif;
+    font-weight: 700;
+}
+
+.metric-container {
+    font-family: 'Noto Sans JP', sans-serif;
+}
+
+/* Plotlyグラフの日本語フォント設定 */
+.js-plotly-plot .plotly .modebar {
+    font-family: 'Noto Sans JP', sans-serif;
+}
+</style>
+""", unsafe_allow_html=True)
+
 # タイトルとヘッダー
 st.title("📊 データ可視化ダッシュボード")
 st.markdown("---")
@@ -156,6 +181,7 @@ def main():
                 names='category',
                 title='カテゴリ別売上比率'
             )
+            fig_pie.update_layout(font=dict(family="Noto Sans JP, sans-serif", size=12))
             st.plotly_chart(fig_pie, use_container_width=True)
         
         with col2:
@@ -166,6 +192,7 @@ def main():
                 title='カテゴリ別総売上',
                 labels={'sum': '総売上 (¥)', 'category': 'カテゴリ'}
             )
+            fig_bar.update_layout(font=dict(family="Noto Sans JP, sans-serif", size=12))
             st.plotly_chart(fig_bar, use_container_width=True)
     
     with tab3:
@@ -184,6 +211,7 @@ def main():
                 title='地域別総売上',
                 labels={'sum': '総売上 (¥)', 'region': '地域'}
             )
+            fig_region_bar.update_layout(font=dict(family="Noto Sans JP, sans-serif", size=12))
             st.plotly_chart(fig_region_bar, use_container_width=True)
         
         with col2:
@@ -196,6 +224,7 @@ def main():
                 title='地域別売上分析（データ数 vs 総売上）',
                 labels={'count': 'データ数', 'sum': '総売上 (¥)'}
             )
+            fig_region_scatter.update_layout(font=dict(family="Noto Sans JP, sans-serif", size=12))
             st.plotly_chart(fig_region_scatter, use_container_width=True)
     
     # データテーブル表示
